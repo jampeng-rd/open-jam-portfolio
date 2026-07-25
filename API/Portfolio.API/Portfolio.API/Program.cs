@@ -130,11 +130,17 @@ builder.Services
 
 
 // Register CORS Policy
+var allowedOrigins =
+	builder.Configuration
+		.GetSection("AllowedOrigins")
+		.Get<string[]>()
+	?? Array.Empty<string>();
+
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowAngular", policy =>
 	{
-		policy.WithOrigins("http://localhost:4200")
+		policy.WithOrigins(allowedOrigins)
 			.AllowAnyHeader()
 			.AllowAnyMethod()
 			.AllowCredentials();
@@ -142,7 +148,26 @@ builder.Services.AddCors(options =>
 	);
 });
 
+
 var app = builder.Build();
+
+
+// 確保圖片儲存目錄存在
+var imagesPath = Path.Combine(app.Environment.WebRootPath, "Images");
+var blogImagesPath = Path.Combine(imagesPath, "blog");
+
+Directory.CreateDirectory(imagesPath);
+Directory.CreateDirectory(blogImagesPath);
+
+// 啟動時套用資料庫 Migration
+using (var scope = app.Services.CreateScope())
+{
+	var applicationDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+	var authDbContext = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+
+	await applicationDbContext.Database.MigrateAsync();
+	await authDbContext.Database.MigrateAsync();
+}
 
 // 建立預設管理員帳號並指派角色
 await IdentitySeeder.SeedAdminUserAsync(
