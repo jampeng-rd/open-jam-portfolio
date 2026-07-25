@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.portfolio-section {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.portfolio-card {
+  overflow: hidden;
+}
+
+.portfolio-card__image {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+.portfolio-card__title {
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+.portfolio-card__description {
+  line-height: 1.6;
+}
+
+/* 手機畫面稍微降低圖片高度 */
+@media (max-width: 767.98px) {
+  .portfolio-card__image {
+    height: 200px;
+  }
+}

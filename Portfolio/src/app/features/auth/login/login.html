@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="mt-5">
+        <div class="col-12 col-md-6 col-lg-4 mx-auto">
+            <h1>Login</h1>
+
+            <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+                <div class="mt-3">
+                    <label for="userName" class="form-label">帳號</label>
+                    <input id="userName" type="text" class="form-control" formControlName="userName">
+                    @if (userNameFormControl.touched && userNameFormControl.hasError('required')) {
+                        <p class="text-danger small">請輸入帳號</p>
+                    } 
+                </div>
+                
+                <div class="mt-3">
+                    <label for="password" class="form-label">密碼</label>
+                    <input id="password" type="password" class="form-control" formControlName="password">
+                    @if (passwordFormControl.touched && passwordFormControl.hasError('required')) {
+                        <p class="text-danger small">請輸入密碼</p>
+                    } 
+                </div>
+
+                @if (loginError()) {
+                    <div class="alert alert-danger mt-3 mb-0">
+                        {{ loginError() }}
+                    </div>
+                }
+
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary" [disabled]="loginFormGroup.invalid || isSubmitting()">
+                        @if (isSubmitting()) {
+                            登入中...
+                        } @else {
+                            登入
+                        }
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

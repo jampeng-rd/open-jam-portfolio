@@ -1,0 +1,170 @@
+<main class="profile-page">
+  <!-- 頁首介紹 -->
+  <section class="profile-page__hero">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-4">
+          <div class="profile-page__image-wrapper">
+            <img
+              src="images/profile.png"
+              alt="Jam 的個人照片"
+              class="profile-page__image img-fluid"
+            >
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-8">
+          <p class="profile-page__eyebrow mb-2">
+            About Me
+          </p>
+
+          <!-- <h1 class="profile-page__title mb-3">
+            關於我
+          </h1> -->
+
+          <p class="profile-page__lead mb-3">
+            我是 Jam，具備視覺設計背景與網站開發經驗，專職於網站前、後端與資料流程的整合應用。
+          </p>
+
+          <p class="profile-page__description text-secondary mb-3">
+            曾從事攝影與平面設計相關工作，累積了視覺表現、版面配置與使用者體驗的敏感度。
+            轉向軟體開發後，對畫面、流程與使用情境的理解延伸到系統功能的開發，
+            不只重視功能是否完成，也關注操作流程是否清楚、實際使用是否順暢。
+          </p>
+
+          <p class="profile-page__description text-secondary mb-4">
+            在學習不同技術的過程中，我喜好整理框架之間共通的概念，
+            例如元件化設計、依賴注入、Repository Pattern、身分驗證、
+            資料驗證與錯誤處理，讓學習不只是增加技術的名稱，
+            而是逐步建立系統性的開發與問題解決能力。
+          </p>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a
+              [routerLink]="['/portfolio-projects']"
+              fragment="portfolio"
+              class="btn btn-primary"
+            >
+              查看作品
+            </a>
+
+            <a
+              href="mailto:jampeng.rd@gmail.com"
+              class="btn btn-outline-dark"
+            >
+              聯絡我
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 開發方式 -->
+  <section class="profile-page__section">
+    <div class="container py-5">
+      <div class="mb-4">
+        <p class="profile-page__section-eyebrow mb-2">
+          Development Approach
+        </p>
+
+        <h2 class="profile-page__section-title mb-3">
+          開發方式
+        </h2>
+
+        <p class="profile-page__section-description text-secondary mb-0">
+          重視功能是否能夠穩定運作，也重視程式在未來是否容易閱讀、修改與維護。
+        </p>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        @for (
+          developmentValue of developmentValues;
+          track developmentValue.title
+        ) {
+          <div class="col d-flex">
+            <article class="card profile-page__value-card h-100 w-100">
+              <div class="card-body">
+                <h3 class="profile-page__card-title mb-3">
+                  {{ developmentValue.title }}
+                </h3>
+
+                <p class="card-text text-secondary mb-0">
+                  {{ developmentValue.description }}
+                </p>
+              </div>
+            </article>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 技能分類 -->
+  <section class="profile-page__section profile-page__skills-section">
+    <div class="container py-5">
+      <div class="mb-4">
+        <p class="profile-page__section-eyebrow mb-2">
+          Skills
+        </p>
+
+        <h2 class="profile-page__section-title mb-3">
+          技能與工具
+        </h2>
+
+        <p class="profile-page__section-description text-secondary mb-0">
+          目前持續使用與實作中的技術，依照開發用途進行分類。
+        </p>
+      </div>
+
+      <div class="row row-cols-1 row-cols-lg-2 g-4">
+        @for (skillGroup of skillGroups; track skillGroup.title) {
+          <div class="col d-flex">
+            <article class="card profile-page__skill-card h-100 w-100">
+              <div class="card-body">
+                <h3 class="profile-page__card-title mb-2">
+                  {{ skillGroup.title }}
+                </h3>
+
+                <p class="text-secondary mb-4">
+                  {{ skillGroup.description }}
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                  @for (skill of skillGroup.skills; track skill) {
+                    <span class="profile-page__skill-badge">
+                      {{ skill }}
+                    </span>
+                  }
+                </div>
+              </div>
+            </article>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 聯絡區塊 -->
+  <section class="profile-page__contact">
+    <div class="container py-5">
+      <div class="profile-page__contact-content text-center">
+        <p class="profile-page__section-eyebrow mb-2">
+          Contact
+        </p>
+
+        <h2 class="profile-page__section-title mb-3">
+          聯絡我
+        </h2>
+
+        <p class="text-secondary mb-4">
+          歡迎透過 Email 與我聯絡，討論工作機會、專案合作或技術交流。
+        </p>
+
+        <a href="mailto:jampeng.rd@gmail.com" class="btn btn-dark">
+          jampeng.rd@gmail.com
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

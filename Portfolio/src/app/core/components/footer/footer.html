@@ -1,0 +1,28 @@
+<footer class="app-footer">
+  <div class="container-fluid px-4">
+    <span class="mb-0">
+      © 2026 JAM
+
+      @if (authService.isLoggedIn()) {
+        <button
+          type="button"
+          class="footer-secret-action"
+          aria-label="登出管理後台"
+          (click)="logout()"
+        >
+          PORTFOLO.
+        </button>
+      } @else {
+        <a
+          [routerLink]="['/log_in']"
+          class="footer-secret-action"
+          aria-label="前往管理後台登入頁"
+        >
+          PORTFOLIO.
+        </a>
+      }
+
+      All rights reserved.
+    </span>
+  </div>
+</footer>

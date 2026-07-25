@@ -1,0 +1,202 @@
+<section class="portfolio-detail">
+  <div class="container py-5">
+    @if (isLoading()) {
+      <div class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-dark" role="status">
+          <span class="visually-hidden">載入中...</span>
+        </div>
+      </div>
+    } @else if (errorMessage()) {
+      <div class="alert alert-danger" role="alert">
+        {{ errorMessage() }}
+      </div>
+    } @else if (portfolioResponse(); as portfolio) {
+      <article class="portfolio-detail__content mx-auto">
+
+        <!-- 專案主要圖片 -->
+        <div class="portfolio-detail__image-wrapper">
+          <img
+            class="portfolio-detail__image"
+            [src]="portfolio.imageUrl"
+            [alt]="portfolio.name"
+            [title]="portfolio.name"
+          >
+        </div>
+
+        <!-- 專案標題 -->
+        <header class="mt-4">
+          <h1 class="portfolio-detail__title">
+            {{ portfolio.name }}
+          </h1>
+
+          <p class="portfolio-detail__summary text-secondary">
+            {{ portfolio.shortDescription }}
+          </p>
+        </header>
+
+        <!-- 使用技術 -->
+        @if (portfolio.technologies.length > 0) {
+          <section class="mt-4">
+            <h2 class="portfolio-detail__section-title">
+              使用技術
+            </h2>
+
+            <div class="d-flex flex-wrap gap-2">
+              @for (technology of portfolio.technologies ; track technology.id) {
+                <span class="badge portfolio-technology-badge">
+                    {{ technology.name }}
+                </span>
+              }
+            </div>
+          </section>
+        }
+
+        <!-- 專案連結 -->
+        @if (
+          portfolio.demoUrl ||
+          portfolio.gitHubUrl ||
+          portfolio.gitLabUrl ||
+          portfolio.videoUrl ||
+          portfolio.pdfUrl
+        ) {
+          <section class="mt-4">
+            <h2 class="portfolio-detail__section-title">
+              專案連結
+            </h2>
+
+            <div class="portfolio-links">
+              @if (portfolio.demoUrl) {
+                <a
+                    class="btn portfolio-link-button"
+                    [href]="portfolio.demoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg
+                        class="portfolio-link-button__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M6.354 5.5H4a2.5 2.5 0 0 0 0 5h2a.5.5 0 0 1 0 1H4a3.5 3.5 0 0 1 0-7h2.354a.5.5 0 1 1 0 1Zm3.292-1H12a3.5 3.5 0 0 1 0 7H9.646a.5.5 0 0 1 0-1H12a2.5 2.5 0 0 0 0-5H9.646a.5.5 0 1 1 0-1ZM5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5A.5.5 0 0 1 5 8Z"
+                        />
+                    </svg>
+                    <span>查看 Demo</span>
+                </a>
+              }
+
+              @if (portfolio.gitHubUrl) {
+                <a
+                    class="btn portfolio-link-button"
+                    [href]="portfolio.gitHubUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg
+                        class="portfolio-link-button__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M8 0C3.58 0 0 3.64 0 8.13c0 3.59 2.29 6.64 5.47 7.72.4.08.55-.18.55-.39 0-.19-.01-.83-.01-1.51-2.01.38-2.53-.5-2.69-.96-.09-.23-.48-.96-.82-1.15-.28-.15-.68-.53-.01-.54.63-.01 1.08.59 1.23.83.72 1.23 1.87.88 2.33.67.07-.53.28-.88.51-1.08-1.78-.21-3.64-.91-3.64-4.02 0-.89.31-1.62.82-2.19-.08-.21-.36-1.04.08-2.16 0 0 .67-.22 2.2.84A7.4 7.4 0 0 1 8 3.93c.68 0 1.36.09 2 .27 1.53-1.06 2.2-.84 2.2-.84.44 1.12.16 1.95.08 2.16.51.57.82 1.3.82 2.19 0 3.12-1.87 3.81-3.65 4.02.29.25.54.74.54 1.51 0 1.09-.01 1.97-.01 2.24 0 .21.15.47.55.39A8.1 8.1 0 0 0 16 8.13C16 3.64 12.42 0 8 0Z"
+                        />
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+              }
+
+              @if (portfolio.gitLabUrl) {
+                <a
+                    class="btn portfolio-link-button"
+                    [href]="portfolio.gitLabUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg
+                        class="portfolio-link-button__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                    >
+                        <path
+                        fill="currentColor"
+                        d="m15.734 6.1-.022-.058-2.13-5.56a.55.55 0 0 0-1.05.034l-1.436 4.39H4.905L3.47.516A.55.55 0 0 0 2.42.482L.29 6.042l-.022.058a3.86 3.86 0 0 0 1.28 4.46l.008.006.02.015 3.24 2.426 1.6 1.21.974.737a1.03 1.03 0 0 0 1.23 0l.974-.737 1.6-1.21 3.26-2.441.008-.007A3.86 3.86 0 0 0 15.734 6.1Z"
+                        />
+                    </svg>
+                    <span>GitLab</span>
+                </a>
+              }
+
+              @if (portfolio.videoUrl) {
+                <a
+                    class="btn portfolio-link-button"
+                    [href]="portfolio.videoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg
+                        class="portfolio-link-button__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                    >
+                        <path
+                        fill="currentColor"
+                        d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5Z"
+                        />
+                        <path
+                        fill="currentColor"
+                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z"
+                        />
+                    </svg>
+                    <span>專案影片</span>
+                </a>
+              }
+
+              @if (portfolio.pdfUrl) {
+                <a
+                    class="btn portfolio-link-button"
+                    [href]="portfolio.pdfUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg
+                        class="portfolio-link-button__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                    >
+                        <path
+                        fill="currentColor"
+                        d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM9.5 1v3a1 1 0 0 0 1 1h3L9.5 1ZM4.5 11.5a.5.5 0 0 0 1 0v-1h.5a1.5 1.5 0 0 0 0-3H5a.5.5 0 0 0-.5.5v3.5Zm1-3h.5a.5.5 0 0 1 0 1h-.5v-1Zm3-1a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h.75a2 2 0 0 0 0-4H8.5Zm.5 1h.25a1 1 0 0 1 0 2H9v-2Zm3-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v3.5a.5.5 0 0 0 1 0V10h.75a.5.5 0 0 0 0-1H11v-.5h1a.5.5 0 0 0 .5-.5Z"
+                        />
+                    </svg>
+                    <span>PDF 文件</span>
+                </a>
+              }
+            </div>
+          </section>
+        }
+
+        <!-- 專案詳細內容 -->
+        <section class="portfolio-detail__description mt-5">
+          <h2 class="portfolio-detail__section-title">
+            專案介紹
+          </h2>
+
+          <div class="markdown-content mt-3">
+            <markdown [data]="portfolio.description"></markdown>
+          </div>
+        </section>
+      </article>
+    } @else {
+      <div class="alert alert-warning" role="alert">
+        找不到這個專案。
+      </div>
+    }
+  </div>
+</section>

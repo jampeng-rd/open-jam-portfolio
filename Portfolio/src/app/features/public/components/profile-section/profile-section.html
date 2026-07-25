@@ -1,0 +1,55 @@
+<section class="profile-section">
+  <div class="container py-5">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-md-5">
+        <div class="profile-image-wrapper">
+          <img
+            src="images/profile.png"
+            alt="大頭照"
+            class="profile-image img-fluid"
+          >
+        </div>
+      </div>
+
+      <div class="col-12 col-md-7">
+        <p class="profile-eyebrow mb-2">
+          Hello, I'm Jam
+        </p>
+
+        <h1 class="profile-title mb-3">
+          網站全端開發者
+        </h1>
+
+        <p class="profile-description text-secondary mb-4">
+          <!-- 一個具備視覺設計背景與網站開發經驗的系統整合工程師 -->
+          一個具備視覺設計背景與資料架構設計的整合工程師
+        </p>
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <span class="badge text-bg-dark">Frontend</span>
+          <span class="badge text-bg-dark">Backend</span>
+          <span class="badge text-bg-dark">Database</span>
+          <span class="badge text-bg-dark">AI</span>
+          <span class="badge text-bg-dark">ROS</span>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3">
+          <a
+            [routerLink]="['/portfolio-projects']"
+            class="btn btn-primary"
+          >
+            查看作品
+          </a>
+
+          <a
+            [routerLink]="['/about-me']"
+            class="btn btn-outline-dark"
+          >
+            關於我
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+<div class="container">
+    <h1 class="mt-3">更新技能</h1>
+
+    <form [formGroup]="editTechnologyFormGroup" (ngSubmit)="onSubmit()">
+        <div class="mt-3">
+            <div class="mt-3">
+                <label class="form-label">名稱</label>
+                <input type="text" class="form-control" formControlName="name"/>
+                @if (nameFormControl.touched && nameFormControl.hasError('required')) {
+                    <p class="text-danger small">必填欄位</p>
+                } 
+                @if (nameFormControl.touched && nameFormControl.hasError('maxlength')) {
+                    <p class="text-danger small">限定100個字</p>
+                }
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label">Icon URL</label>
+                <input type="text" class="form-control" formControlName="iconUrl"/>
+                @if (iconUrlFormControl.touched && iconUrlFormControl.hasError('maxlength')) {
+                    <p class="text-danger small">限定2000個字</p>
+                }
+            </div>
+
+            <div class="mt-3 d-flex gap-4">
+                <button 
+                    type="submit" 
+                    class="btn btn-primary" 
+                    [disabled]="editTechnologyFormGroup.valid === false"
+                >
+                    Save
+                </button>
+
+                <button type="button" class="btn btn-danger" (click)="deleteTechnology()">Delete</button>
+            </div>
+        </div>
+    </form>
+</div>

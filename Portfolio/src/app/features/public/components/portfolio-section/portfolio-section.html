@@ -1,0 +1,133 @@
+<section
+  id="portfolio"
+  class="portfolio-section"
+>
+  <div class="container my-5">
+    @if (isLoading()) {
+      <div class="d-flex justify-content-center py-5">
+        <div
+          class="spinner-border text-dark"
+          role="status"
+        >
+          <span class="visually-hidden">
+            載入中...
+          </span>
+        </div>
+      </div>
+    } @else if (errorMessage()) {
+      <div
+        class="alert alert-danger"
+        role="alert"
+      >
+        {{ errorMessage() }}
+      </div>
+    } @else if (portFolios().length > 0) {
+      <div
+        class="portfolio-carousel"
+        (mouseenter)="pauseAutoplay()"
+        (mouseleave)="resumeAutoplay()"
+      >
+        <div class="portfolio-carousel__viewport">
+          <div class="portfolio-carousel__track">
+            @for (
+              portfolio of visiblePortfolios();
+              track portfolio.id
+            ) {
+              <a
+                [routerLink]="[
+                  '/portfolio',
+                  portfolio.name
+                ]"
+                class="portfolio-carousel__item"
+              >
+                <div class="portfolio-carousel__image-wrapper">
+                  <img
+                    [src]="portfolio.imageUrl"
+                    [alt]="portfolio.name"
+                    class="portfolio-carousel__image"
+                  >
+
+                  <div class="portfolio-carousel__overlay">
+                    <div class="portfolio-carousel__content">
+                      <h2 class="portfolio-carousel__title mb-2">
+                        {{ portfolio.name }}
+                      </h2>
+
+                      <p class="portfolio-carousel__description mb-0">
+                        {{ portfolio.shortDescription }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+
+        @if (portFolios().length > 1) {
+          <button
+            type="button"
+            class="
+              portfolio-carousel__control
+              portfolio-carousel__control--previous
+            "
+            aria-label="顯示上一組作品"
+            (click)="previousSlide(true)"
+          >
+            <span aria-hidden="true">
+              ‹
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="
+              portfolio-carousel__control
+              portfolio-carousel__control--next
+            "
+            aria-label="顯示下一組作品"
+            (click)="nextSlide(true)"
+          >
+            <span aria-hidden="true">
+              ›
+            </span>
+          </button>
+
+          <div
+            class="portfolio-carousel__indicators"
+            aria-label="作品輪播選擇"
+          >
+            @for (
+              portfolio of portFolios();
+              track portfolio.id;
+              let index = $index
+            ) {
+              <button
+                type="button"
+                class="portfolio-carousel__indicator"
+                [class.portfolio-carousel__indicator--active]="
+                  currentSlideIndex() === index
+                "
+                [attr.aria-label]="
+                  '從作品「' +
+                  portfolio.name +
+                  '」開始顯示'
+                "
+                [attr.aria-current]="
+                  currentSlideIndex() === index
+                    ? 'true'
+                    : null
+                "
+                (click)="goToSlide(index)"
+              ></button>
+            }
+          </div>
+        }
+      </div>
+    } @else {
+      <p class="text-secondary text-center py-5">
+        目前沒有作品資料。
+      </p>
+    }
+  </div>
+</section>
