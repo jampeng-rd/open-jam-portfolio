@@ -1,4 +1,4 @@
 export const environment = {
-    apiBaseUrl: 'https://prod.portfolio.com',
-    environment: 'production'
+    production: true,
+    apiBaseUrl: 'https://open-jam.azurewebsites.net',
 };
