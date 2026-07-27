@@ -1,6 +1,6 @@
 # 請參閱 https://aka.ms/customizecontainer 了解如何自訂您的偵錯容器，以及 Visual Studio 如何使用此 Dockerfile 來組建您的映像，以加快偵錯速度。
 
-# ASP.NET Core 執行環境
+# ASP.NET Core production runtime 執行環境
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
